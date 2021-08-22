@@ -236,7 +236,16 @@ export const Timer = () => {
         >
           {isActive ? "Pause" : "Start"}
         </button>
-        <button className="btn">RESET</button>
+        <button
+          className="btn"
+          onClick={() => {
+            setIsActive(false);
+            setSecond("00");
+            setMinute("00");
+          }}
+        >
+          RESET
+        </button>
       </div>
 
       {/* DEBUG TIMER INSTRUCTIONS */}
