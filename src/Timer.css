@@ -1,0 +1,51 @@
+:root {
+  margin: 0;
+  padding: 0;
+  background-color: #111827;
+}
+
+.btn {
+  background-color: #6b7280;
+  border-radius: 80px;
+  border: 3px solid #9ca3af;
+  box-shadow: black;
+  color: #f3f4f6;
+  font-size: 20px;
+  text-shadow: black;
+  text-transform: uppercase;
+  width: 10rem;
+  height: 60px;
+  font-family: "Nunito", sans-serif;
+  margin: 10px;
+}
+
+.btn:checked {
+  background-color: #10b981;
+}
+
+.btn.disabled {
+  background-color: grey;
+}
+
+.btn:hover {
+  background-color: #10b981;
+}
+
+.text {
+  color: #f3f4f6;
+  font-family: "Nunito", sans-serif;
+  font-size: 20px;
+}
+
+.text.timer {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-size: 120px;
+}
+
+.quick-timer-wrapper {
+  background-color: #4b5563;
+  margin: auto;
+  column-count: 3;
+  width: 75%;
+  opacity: 80%;
+}
