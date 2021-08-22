@@ -28,7 +28,23 @@
 }
 
 .btn:hover {
+  background-color: #9ca3af;
+}
+
+.btn.start:hover {
+  background-color: #059669;
+}
+
+.btn.start {
   background-color: #10b981;
+}
+
+.btn.pause {
+  background-color: #fbbf24;
+}
+
+.btn.pause:hover {
+  background-color: #f59e0b;
 }
 
 .text {
@@ -46,6 +62,6 @@
   background-color: #4b5563;
   margin: auto;
   column-count: 3;
-  width: 75%;
+  width: 50%;
   opacity: 80%;
 }
