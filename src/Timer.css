@@ -47,6 +47,14 @@
   background-color: #f59e0b;
 }
 
+.btn.reset {
+  background-color: #ef4444;
+}
+
+.btn.reset:hover {
+  background-color: #dc2626;
+}
+
 .text {
   color: #f3f4f6;
   font-family: "Nunito", sans-serif;

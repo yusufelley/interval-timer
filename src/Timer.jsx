@@ -46,12 +46,17 @@ export const Timer = () => {
     },
   });
 
-  const [timerInstructions, setTimerInstructions] = useState({
+  const defaultTimerInstructions = {
     numSets: "0",
     timeOn: "0",
     timeOff: "0",
     currentTimer: "TIME_ON",
-  });
+    timerStarted: "false",
+  };
+
+  const [timerInstructions, setTimerInstructions] = useState(
+    defaultTimerInstructions
+  );
 
   useEffect(() => {
     let intervalId;
@@ -99,6 +104,11 @@ export const Timer = () => {
 
     return () => clearInterval(intervalId);
   }, [isActive, counter]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target.value);
+  };
 
   return (
     <div className="content-wrapper">
@@ -237,11 +247,14 @@ export const Timer = () => {
           {isActive ? "Pause" : "Start"}
         </button>
         <button
-          className="btn"
+          className={isActive ? "btn disbaled" : "btn reset"}
           onClick={() => {
-            setIsActive(false);
-            setSecond("00");
-            setMinute("00");
+            if (!isActive) {
+              setIsActive(false);
+              setSecond("00");
+              setMinute("00");
+              setTimerInstructions(defaultTimerInstructions);
+            }
           }}
         >
           RESET
@@ -250,6 +263,43 @@ export const Timer = () => {
 
       {/* DEBUG TIMER INSTRUCTIONS */}
       <div className="text">{JSON.stringify(timerInstructions)}</div>
+
+      {/* SETTINGS */}
+      <div>
+        <div className="text">SETTINGS</div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <select type="dropdown" name="set-sets" id="set-sets">
+              <option value="set1">set1</option>
+              <option value="set2">set2</option>
+              <option value="set3">set3</option>
+            </select>
+            <input type="text" placeholder="sets" id="set-sets" />
+          </div>
+
+          <div>
+            <select name="" id="">
+              <option value="on1">on1</option>
+              <option value="on2">on2</option>
+              <option value="on3">on3</option>
+            </select>
+            <input type="text" placeholder="on" />
+          </div>
+
+          <div>
+            <select name="" id="">
+              <option value="off1">off1</option>
+              <option value="off2">off2</option>
+              <option value="off3">off3</option>
+            </select>
+            <input type="text" placeholder="off" />
+          </div>
+
+          <button className="btn" type="submit">
+            SUBMIT CHANGES
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
