@@ -52,11 +52,21 @@ export const Timer = () => {
     timeOff: "0",
     currentTimer: "TIME_ON",
     timerStarted: "false",
+    resume: "0",
   };
 
   const [timerInstructions, setTimerInstructions] = useState(
     defaultTimerInstructions
   );
+
+  const handleStart = () => {
+    if (timerInstructions.timerStarted) {
+      setTimerInstructions({ ...timerInstructions });
+    } else {
+      setCounter(timerInstructions.timeOn);
+      setIsActive(!isActive);
+    }
+  };
 
   useEffect(() => {
     let intervalId;
@@ -240,8 +250,7 @@ export const Timer = () => {
         <button
           className={isActive ? "btn pause" : "btn start"}
           onClick={() => {
-            setCounter(timerInstructions.timeOn);
-            setIsActive(!isActive);
+            handleStart();
           }}
         >
           {isActive ? "Pause" : "Start"}
