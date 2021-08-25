@@ -4,7 +4,6 @@ import "./Timer.css";
 export const Timer = () => {
   const [second, setSecond] = useState("00");
   const [minute, setMinute] = useState("00");
-  const [isActive, setIsActive] = useState(false);
   const [counter, setCounter] = useState(0);
 
   const [quickButtons, setQuickButtons] = useState({
@@ -47,12 +46,13 @@ export const Timer = () => {
   });
 
   const defaultTimerInstructions = {
-    numSets: "0",
-    timeOn: "0",
-    timeOff: "0",
+    numSets: 0,
+    timeOn: 0,
+    timeOff: 0,
     currentTimer: "TIME_ON",
-    timerStarted: "false",
-    resume: "0",
+    timerStarted: false,
+    resume: 0,
+    isActive: false,
   };
 
   const [timerInstructions, setTimerInstructions] = useState(
@@ -60,12 +60,12 @@ export const Timer = () => {
   );
 
   const handleStart = () => {
-    if (timerInstructions.timerStarted) {
-      setTimerInstructions({ ...timerInstructions });
-    } else {
-      setCounter(timerInstructions.timeOn);
-      setIsActive(!isActive);
-    }
+    timerInstructions.timerStarted = true;
+    setCounter(timerInstructions.timeOn);
+    setTimerInstructions({
+      ...timerInstructions,
+      isActive: !timerInstructions.isActive,
+    });
   };
 
   useEffect(() => {
@@ -86,11 +86,11 @@ export const Timer = () => {
     }
 
     if (timerInstructions.numSets <= 0) {
-      setIsActive(false);
-      console.log("CHECK IS ACTIVE: " + isActive);
+      setTimerInstructions(defaultTimerInstructions);
+      console.log("CHECK IS ACTIVE: " + timerInstructions.isActive);
     }
 
-    if (isActive && counter >= 0) {
+    if (timerInstructions.isActive && counter >= 0) {
       console.log("IS ACTIVE AND COUNTER >= 0: " + counter);
       intervalId = setInterval(() => {
         const secondCounter = counter % 60;
@@ -109,11 +109,12 @@ export const Timer = () => {
         setMinute(computedMinute);
 
         setCounter((counter) => counter - 1);
+        timerInstructions.resume = counter;
       }, 1000);
     }
 
     return () => clearInterval(intervalId);
-  }, [isActive, counter]);
+  }, [timerInstructions.isActive, counter]);
 
   return (
     <div className="content-wrapper">
@@ -242,20 +243,36 @@ export const Timer = () => {
 
       {/* START STOP BUTTONS */}
       <div className="start-stop-wrapper">
+        {timerInstructions.timerStarted && !timerInstructions.isActive ? (
+          <button
+            className="btn resume"
+            onClick={() => {
+              setCounter(timerInstructions.resume);
+              setTimerInstructions({ ...timerInstructions, isActive: true });
+            }}
+          >
+            RESUME
+          </button>
+        ) : (
+          <button
+            className={timerInstructions.isActive ? "btn pause" : "btn start"}
+            onClick={() => {
+              handleStart();
+            }}
+          >
+            {timerInstructions.isActive ? "Pause" : "Start"}
+          </button>
+        )}
         <button
-          className={isActive ? "btn pause" : "btn start"}
+          className={timerInstructions.isActive ? "btn disabled" : "btn reset"}
           onClick={() => {
-            handleStart();
-          }}
-        >
-          {isActive ? "Pause" : "Start"}
-        </button>
-        <button
-          className="btn"
-          onClick={() => {
-            setIsActive(false);
-            setSecond("00");
-            setMinute("00");
+            if (!timerInstructions.isActive) {
+              setSecond("00");
+              setMinute("00");
+              setTimerInstructions(defaultTimerInstructions);
+            } else {
+              alert("PAUSE TIMER TO ENABLE RESET BUTTON");
+            }
           }}
         >
           RESET

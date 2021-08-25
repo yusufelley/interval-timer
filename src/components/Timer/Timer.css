@@ -56,6 +56,10 @@
   background-color: #dc2626;
 }
 
+.btn.resume {
+  background-color: coral;
+}
+
 .text {
   color: #f3f4f6;
   font-family: "Nunito", sans-serif;
