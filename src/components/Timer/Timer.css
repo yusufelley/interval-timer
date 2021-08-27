@@ -3,6 +3,19 @@
   padding: 0;
   background-color: #111111;
   text-align: center;
+  margin-top: 200px;
+}
+
+button {
+  background: transparent;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+}
+
+.text.quick {
+  width: 200px;
+  background-color: blue;
 }
 
 .btn {
@@ -18,10 +31,7 @@
   height: 60px;
   font-family: "Nunito", sans-serif;
   margin: 10px;
-}
-
-.btn:checked {
-  background-color: #10b981;
+  transition: all 1s ease;
 }
 
 .btn.disabled {
@@ -52,6 +62,10 @@
   background-color: #ef4444;
 }
 
+.btn.reset.circle {
+  width: 60px;
+}
+
 .btn.reset:hover {
   background-color: #dc2626;
 }
@@ -60,10 +74,22 @@
   background-color: coral;
 }
 
+.btn.debug {
+  background-color: blueviolet;
+}
+.btn.debug:hover {
+  background-color: rgb(148, 65, 226);
+}
+
 .text {
   color: #f3f4f6;
   font-family: "Nunito", sans-serif;
   font-size: 20px;
+}
+
+.text.large {
+  font-size: 40px;
+  margin-top: 10px;
 }
 
 .text.timer {
@@ -71,10 +97,39 @@
   font-size: 120px;
 }
 
+.settings {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+
 .quick-timer-wrapper {
+  display: flex;
+  flex-direction: column;
   background-color: #4b5563;
   margin: auto;
   column-count: 3;
-  width: 50%;
-  opacity: 80%;
+  width: 600px;
+  height: 350px;
+  opacity: 97%;
+  border-radius: 10px;
+
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  margin-top: -125px;
+  margin-left: -300px;
+}
+
+.preset-card-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.red-box {
+  background-color: red;
+}
+
+.blue-box {
+  background-color: blue;
 }
